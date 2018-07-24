@@ -13,29 +13,31 @@ npm install messenger-json-builder
 ```js
   import M from "messenger-json-builder";
 
-  const coverImage = M.getImage(`${content.cover}`);
+  const getMovieJson = (movie) => {
+    const coverImage = M.getImage(`${movie.cover}`);
 
-  const details = M.createElement([
-    M.button({
-      type: "web_url",
-      url: `${PLAY_URL}/movies/${content.id}`,
-      title: "See on Play!"
-    }),
-    M.button({
-      type: "show_block",
-      block_names: ["NewSearch"],
-      title: "New Search"
-    }),
-    M.button({
-      type: "show_block",
-      block_names: ["EndSuccess"],
-      title: "Thanks! See you!"
-    })
-  ]);
+    const details = M.createElement([
+      M.button({
+        type: "web_url",
+        url: `${PLAY_URL}/movies/${movie.id}`,
+        title: "See on Play!"
+      }),
+      M.button({
+        type: "show_block",
+        block_names: ["NewSearch"],
+        title: "New Search"
+      }),
+      M.button({
+        type: "show_block",
+        block_names: ["EndSuccess"],
+        title: "Thanks! See you!"
+      })
+    ]);
 
-  const sinopsysText = M.getText(sinopsys);
-  const detailsButtons = M.getButtons([sinopsysText, details]);
-  return M.send([coverImage, detailsButtons]);
+    const sinopsysText = M.getText(sinopsys);
+    const detailsButtons = M.getButtons([sinopsysText, details]);
+    return M.send([coverImage, detailsButtons]);
+  }
 ```
 
 ## API
